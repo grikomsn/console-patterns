@@ -1,0 +1,19 @@
+import React from 'react'
+
+import A from './a'
+
+const Footer: React.FC = () => (
+  <footer className="p-8 pb-16 text-sm text-center">
+    Made using <A href="https://nextjs.org/">Next.js</A> and{' '}
+    <A href="https://tailwindcss.com/">Tailwind CSS</A>, hosted on{' '}
+    <A href="https://zeit.co/home">ZEIT Now</A>.
+    <br />
+    Source code is{' '}
+    <A href="https://github.com/grikomsn/console-patterns">
+      available on GitHub
+    </A>
+    .
+  </footer>
+)
+
+export default Footer

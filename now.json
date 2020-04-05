@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "scope": "griko",
+  "name": "console-patterns",
+  "github": {
+    "autoAlias": true,
+    "enabled": true
+  },
+  "public": true
+}

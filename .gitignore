@@ -1,0 +1,13 @@
+!/public/.gitkeep
+!/public/social.png
+
+.DS_Store
+.now
+/.next
+/build
+/node_modules
+/out
+/public/**/*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

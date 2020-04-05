@@ -1,0 +1,48 @@
+{
+  "name": "console-patterns",
+  "description": "Collection of snippets to render logical patterns",
+  "version": "2.0.0",
+  "repository": "git@github.com:grikomsn/console-patterns.git",
+  "author": "Griko Nibras <git@griko.id>",
+  "scripts": {
+    "build": "yarn build:favicons && next build",
+    "build:favicons": "node generate-favicons",
+    "develop": "next dev",
+    "format": "prettier --write \"{patterns,src}/**/*.{css,js,tsx}\"",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@sindresorhus/class-names": "^1.1.0",
+    "favicons": "^6.0.0",
+    "next": "^9.3.4",
+    "next-seo": "^4.4.0",
+    "postcss-preset-env": "^6.7.0",
+    "prism-react-renderer": "^1.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "tailwindcss": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
+    "@types/react-dom": "^16.9.6",
+    "husky": "^4.2.3",
+    "prettier": "^2.0.2",
+    "typescript": "^3.8.3"
+  },
+  "optionalDependencies": {
+    "stylelint-config-recommended": "^3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "license": "MIT"
+}
