@@ -1,6 +1,3 @@
-!/public/.gitkeep
-!/public/social.png
-
 .DS_Store
 .now
 /.next
@@ -11,3 +8,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+!/public/social.png
