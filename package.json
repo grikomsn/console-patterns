@@ -8,6 +8,7 @@
     "build": "yarn build:dir && yarn build:favicons && next build",
     "build:dir": "mkdirp ./public/icons/",
     "build:favicons": "node generate-favicons",
+    "clean": "rimraf .next \"./public/!(social.png)\"",
     "develop": "next dev",
     "format": "prettier --write \"{patterns,src}/**/*.{css,js,tsx}\"",
     "start": "next start"
@@ -31,6 +32,7 @@
     "husky": "^4.2.3",
     "mkdirp": "^1.0.4",
     "prettier": "^2.0.2",
+    "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
   },
   "optionalDependencies": {
