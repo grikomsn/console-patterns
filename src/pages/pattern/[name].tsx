@@ -4,30 +4,40 @@ import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import path from 'path'
+import theme from 'prism-react-renderer/themes/nightOwl'
 import * as React from 'react'
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 
+import { LogicFunction } from '../../../types'
+import A from '../../components/a'
 import Container from '../../components/container'
-import PatternSource from '../../components/pattern/pattern-source'
 import { createPattern } from '../../utils'
+
+function createGitHubLink(name: string) {
+  return `https://github.com/grikomsn/console-patterns/blob/master/patterns/${name}`
+}
 
 type PatternPageProps = {
   filename: string
   source: string
 }
 
-const PatternPage: NextPage<PatternPageProps> = ({ filename, source }) => {
-  const { query } = useRouter()
+const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
+  const router = useRouter()
+  const title = `${router.query.name}`
 
   const [size, setSize] = React.useState(5)
   const inc = () => setSize(size + 1)
   const dec = () => size > 1 && setSize(size - 1)
 
-  const computedPattern = React.useMemo(() => {
-    const logic = require(`../../../patterns/${filename}`).default
-    return createPattern(logic).test(size)
-  }, [size])
-
-  const title = `${query.name}`
+  const [code, setCode] = React.useState(source)
+  const PatternRenderer: React.FC<{ children: LogicFunction }> = (props) => (
+    <pre>{createPattern(props.children).test(size)}</pre>
+  )
+  const transformer = (s: string) => {
+    const source = s.replace(/export default /, '')
+    return `<PatternRenderer>{${source}}</PatternRenderer>`
+  }
 
   const Decrease: React.FC = () => (
     <button className="px-2 text-gray-900 bg-gray-400 rounded-sm" onClick={dec}>
@@ -47,6 +57,10 @@ const PatternPage: NextPage<PatternPageProps> = ({ filename, source }) => {
     </button>
   )
 
+  React.useEffect(() => {
+    document.querySelector('textarea').focus()
+  }, [])
+
   return (
     <Container>
       <NextSeo title={title} />
@@ -57,25 +71,47 @@ const PatternPage: NextPage<PatternPageProps> = ({ filename, source }) => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
-        <PatternSource title={title} source={source} />
+      <LiveProvider
+        code={code}
+        scope={{ PatternRenderer }}
+        theme={{ ...theme, plain: {} }}
+        transformCode={transformer}
+      >
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+          <div className="flex flex-col px-8 py-4 bg-gray-900 rounded shadow lg:col-span-3">
+            <h6 className="mt-0 text-center">{title}</h6>
 
-        <div className="flex flex-col justify-between p-8 bg-gray-900 rounded shadow lg:col-span-2">
-          <div className="text-center">
-            <Decrease />
-            <SizeIndicator />
-            <Increase />
+            <div className="flex flex-col flex-grow pb-4 md:flex-row">
+              <div className="overflow-x-auto text-sm lg:text-base">
+                <LiveEditor onChange={(newCode) => setCode(newCode)} />
+                <LiveError />
+              </div>
+            </div>
+
+            <div className="text-sm text-center">
+              <A href={createGitHubLink(`${title}.pattern.js`)}>
+                View on GitHub
+              </A>
+            </div>
           </div>
-          <pre className="flex-grow py-8 overflow-x-auto">
-            {computedPattern}
-          </pre>
-          <div className="text-center">
-            <Decrease />
-            <SizeIndicator />
-            <Increase />
+
+          <div className="flex flex-col justify-between p-8 bg-gray-900 rounded shadow lg:col-span-2">
+            <div className="text-center">
+              <Decrease />
+              <SizeIndicator />
+              <Increase />
+            </div>
+            <pre className="flex-grow py-8 overflow-x-auto">
+              <LivePreview />
+            </pre>
+            <div className="text-center">
+              <Decrease />
+              <SizeIndicator />
+              <Increase />
+            </div>
           </div>
         </div>
-      </div>
+      </LiveProvider>
     </Container>
   )
 }
@@ -95,12 +131,11 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const filename = `${params.name}.pattern.js`
   const patternsDirectory = path.join(process.cwd(), 'patterns')
-  const filePath = path.join(patternsDirectory, filename)
+  const filePath = path.join(patternsDirectory, `${params.name}.pattern.js`)
   const source = fs.readFileSync(filePath, 'utf8').trim()
 
-  return { props: { filename, source } }
+  return { props: { source } }
 }
 
 export default PatternPage
