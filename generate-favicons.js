@@ -4,11 +4,6 @@ const path = require('path')
 
 const config = require('./site-config')
 
-const iconsDir = path.resolve(__dirname, './public/icons')
-if (!fs.existsSync(iconsDir)) {
-  fs.mkdirSync(iconsDir)
-}
-
 favicons(
   path.join(__dirname, './src/images/kite.png'),
   {
@@ -39,7 +34,7 @@ favicons(
 
     images.forEach((image) => {
       fs.writeFile(
-        path.resolve(iconsDir, image.name),
+        path.resolve(__dirname, './public/icons', image.name),
         image.contents,
         (error) => error && console.error(error),
       )
