@@ -1,3 +1,4 @@
+import { toClipboard } from 'copee'
 import fs from 'fs'
 import { GetStaticProps, NextPage } from 'next'
 import { NextSeo } from 'next-seo'
@@ -89,6 +90,10 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
             </div>
 
             <div className="text-sm text-center">
+              <button className="link" onClick={() => toClipboard(code)}>
+                Copy to clipboard
+              </button>
+              <span className="mx-2">/</span>
               <A href={createGitHubLink(`${title}.pattern.js`)}>
                 View on GitHub
               </A>
