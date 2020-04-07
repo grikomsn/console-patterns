@@ -3,11 +3,11 @@ import { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
 import path from 'path'
 import Highlight, { Prism } from 'prism-react-renderer'
-import theme from 'prism-react-renderer/themes/nightOwl'
 import * as React from 'react'
 
 import { LogicFunction } from '../../types'
 import Container from '../components/container'
+import theme from '../prism-theme'
 import { createPattern } from '../utils'
 
 type PatternData = {

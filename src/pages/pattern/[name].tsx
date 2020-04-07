@@ -4,13 +4,13 @@ import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import path from 'path'
-import theme from 'prism-react-renderer/themes/nightOwl'
 import * as React from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 
 import { LogicFunction } from '../../../types'
 import A from '../../components/a'
 import Container from '../../components/container'
+import theme from '../../prism-theme'
 import { createPattern } from '../../utils'
 
 function createGitHubLink(name: string) {
@@ -74,7 +74,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
       <LiveProvider
         code={code}
         scope={{ PatternRenderer }}
-        theme={{ ...theme, plain: {} }}
+        theme={theme}
         transformCode={transformer}
       >
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
