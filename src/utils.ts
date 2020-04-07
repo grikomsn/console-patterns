@@ -1,9 +1,5 @@
 import { LogicFunction } from '../types'
 
-export function createGitHubLink(name: string) {
-  return `https://github.com/grikomsn/console-patterns/blob/master/patterns/${name}`
-}
-
 export function createPattern(logic: LogicFunction) {
   return {
     test: (size: number) => {
@@ -17,7 +13,12 @@ export function createPattern(logic: LogicFunction) {
         out += s
       }
 
-      logic({ newline, print, size })
+      try {
+        logic({ newline, print, size })
+      } catch (error) {
+        return `${error as ReferenceError}`
+      }
+
       return out
     },
   }
