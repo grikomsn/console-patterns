@@ -10,11 +10,17 @@ body {
   @apply font-sans antialiased text-gray-100 bg-indigo-900;
 }
 
-a {
+::selection {
+  @apply bg-indigo-600;
+}
+
+a,
+.link {
   @apply text-indigo-300;
 }
 
-a:hover {
+a:hover,
+.link:hover {
   @apply text-indigo-500;
 }
 

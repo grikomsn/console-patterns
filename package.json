@@ -16,6 +16,7 @@
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
     "@sindresorhus/class-names": "^1.1.0",
+    "copee": "^1.0.6",
     "favicons": "^6.0.0",
     "next": "^9.3.3",
     "next-seo": "^4.4.0",

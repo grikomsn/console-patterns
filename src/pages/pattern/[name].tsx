@@ -1,16 +1,17 @@
+import { toClipboard } from 'copee'
 import fs from 'fs'
 import { GetStaticProps, NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import path from 'path'
-import theme from 'prism-react-renderer/themes/nightOwl'
 import * as React from 'react'
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from 'react-live'
 
 import { LogicFunction } from '../../../types'
 import A from '../../components/a'
 import Container from '../../components/container'
+import theme from '../../prism-theme'
 import { createPattern } from '../../utils'
 
 function createGitHubLink(name: string) {
@@ -74,12 +75,18 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
       <LiveProvider
         code={code}
         scope={{ PatternRenderer }}
-        theme={{ ...theme, plain: {} }}
+        theme={theme}
         transformCode={transformer}
       >
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
           <div className="flex flex-col px-8 py-4 bg-gray-900 rounded shadow lg:col-span-3">
-            <h6 className="mt-0 text-center">{title}</h6>
+            <div className="text-center">
+              <h6 className="mt-0">{title}</h6>
+              <p className="text-gray-600 mb-2 text-sm">
+                You can click or tap the snippet below and edit the code which
+                generates the pattern
+              </p>
+            </div>
 
             <div className="flex flex-col flex-grow pb-4 md:flex-row">
               <div className="overflow-x-auto text-sm lg:text-base">
@@ -89,6 +96,10 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
             </div>
 
             <div className="text-sm text-center">
+              <button className="link" onClick={() => toClipboard(code)}>
+                Copy to clipboard
+              </button>
+              <span className="mx-2">/</span>
               <A href={createGitHubLink(`${title}.pattern.js`)}>
                 View on GitHub
               </A>
