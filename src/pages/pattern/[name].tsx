@@ -80,7 +80,13 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
       >
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
           <div className="flex flex-col px-8 py-4 bg-gray-900 rounded shadow lg:col-span-3">
-            <h6 className="mt-0 text-center">{title}</h6>
+            <div className="text-center">
+              <h6 className="mt-0">{title}</h6>
+              <p className="text-gray-600 mb-2 text-sm">
+                You can click or tap the snippet below and edit the code which
+                generates the pattern
+              </p>
+            </div>
 
             <div className="flex flex-col flex-grow pb-4 md:flex-row">
               <div className="overflow-x-auto text-sm lg:text-base">
