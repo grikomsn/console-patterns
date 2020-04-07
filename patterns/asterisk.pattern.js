@@ -1,12 +1,12 @@
 export default ({ newline, print, size }) => {
   for (let i = 0; i < 2 * size - 1; i++) {
     for (let j = 0; j < 2 * size - 1; j++) {
-      let horizontalCenter = i === size - 1
-      let verticalCenter = j === size - 1
-      let diagonal1 = j === i
-      let diagonal2 = j === 2 * size - i - 2
-      let clause = verticalCenter || diagonal1 || diagonal2 || horizontalCenter
-      print(clause ? '* ' : '  ')
+      let h /* ─ */ = i === size - 1
+      let v /* │ */ = j === size - 1
+      let d1 /* ↘ */ = i === j
+      let d2 /* ↙ */ = j === 2 * size - i - 2
+
+      print(h || v || d1 || d2 ? '* ' : '  ')
     }
     newline()
   }
