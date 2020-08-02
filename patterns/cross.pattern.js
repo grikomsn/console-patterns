@@ -4,7 +4,7 @@ export default ({ newline, print, size }) => {
       let /* ↘ */ ltrb = i === j
       let /* ↙ */ rtlb = j === size - i - 1
 
-      print(ltrb || rtlb ? '* ' : '  ')
+      print(ltrb || rtlb ? "* " : "  ")
     }
     newline()
   }

@@ -1,5 +1,5 @@
 .DS_Store
-.now
+.vercel
 /.next
 /build
 /node_modules

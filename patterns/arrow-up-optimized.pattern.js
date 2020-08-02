@@ -8,7 +8,7 @@ export default ({ newline, print, size }) => {
       let head = j >= size - i - 1 && i < size
       let line = j === size - 1
 
-      print(head || line ? '* ' : '  ')
+      print(head || line ? "* " : "  ")
     }
     newline()
   }

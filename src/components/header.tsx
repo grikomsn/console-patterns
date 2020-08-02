@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from "react";
 
-import config from '../../site-config'
-import A from '../components/a'
+import A from "@/components/a";
+import config from "~/site-config";
 
 const Header: React.FC = () => (
   <div className="p-4 text-center">
@@ -9,13 +9,13 @@ const Header: React.FC = () => (
     <p className="text-xl">{config.description}</p>
 
     <p className="text-sm">
-      Request new patterns or find some bugs?{' '}
+      Request new patterns or find some bugs?{" "}
       <A href="https://github.com/grikomsn/console-patterns/issues">
         Submit an issue on GitHub
       </A>
       .
     </p>
   </div>
-)
+);
 
-export default Header
+export default Header;

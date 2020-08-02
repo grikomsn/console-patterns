@@ -1,25 +1,25 @@
-import { LogicFunction } from '../types'
+import { LogicFunction } from "@/types";
 
 export function createPattern(logic: LogicFunction) {
   return {
     test: (size: number) => {
-      let out = ''
+      let out = "";
 
       function newline() {
-        out += '\n'
+        out += "\n";
       }
 
       function print(s: string) {
-        out += s
+        out += s;
       }
 
       try {
-        logic({ newline, print, size })
+        logic({ newline, print, size });
       } catch (error) {
-        return `${error as ReferenceError}`
+        return `${error as ReferenceError}`;
       }
 
-      return out
+      return out;
     },
-  }
+  };
 }

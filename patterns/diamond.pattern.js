@@ -6,7 +6,7 @@ export default ({ newline, print, size }) => {
       let rt /* ↙ */ = j <= size + i - 1
       let rb /* ↖ */ = j < size * 3 - i - 2
 
-      print(lt && lb && rt && rb ? '* ' : '  ')
+      print(lt && lb && rt && rb ? "* " : "  ")
     }
     newline()
   }

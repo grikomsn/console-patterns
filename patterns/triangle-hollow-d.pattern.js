@@ -6,7 +6,7 @@ export default ({ newline, print, size }) => {
       let vertical = j === size - 1
 
       let clause = diagonal || horizontal || vertical
-      print(clause ? '* ' : '  ')
+      print(clause ? "* " : "  ")
     }
     newline()
   }

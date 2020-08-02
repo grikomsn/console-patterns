@@ -1,18 +1,19 @@
-import cns from '@sindresorhus/class-names'
-import * as React from 'react'
+import * as React from "react";
+
+import cns from "@sindresorhus/class-names";
 
 export type AProps = React.AnchorHTMLAttributes<{}> & {
-  custom?: boolean
-}
+  custom?: boolean;
+};
 
 const A: React.FC<AProps> = ({ custom = false, ...props }) => (
   <a
     {...props}
     target="_blank"
     rel="noopener noreferrer"
-    className={cns({ 'custom-link': custom }, props.className)}
-    children={props.children || props.href.replace(/https?:\/\//, '')}
+    className={cns({ "custom-link": custom }, props.className)}
+    children={props.children || props.href.replace(/https?:\/\//, "")}
   />
-)
+);
 
-export default A
+export default A;

@@ -8,7 +8,7 @@ export default ({ newline, print, size }) => {
       let lt /* ↘ */ = j >= size - i - 1
       let lb /* ↗ */ = j > i - size
 
-      print(lt && lb ? '* ' : '  ')
+      print(lt && lb ? "* " : "  ")
     }
     newline()
   }

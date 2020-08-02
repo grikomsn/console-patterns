@@ -4,7 +4,7 @@ export default ({ newline, print, size }) => {
       let odd = i % 2 !== 0 && j % 2 !== 0
       let even = i % 2 === 0 && j % 2 === 0
 
-      print(odd || even ? '█ ' : '  ')
+      print(odd || even ? "█ " : "  ")
     }
     newline()
   }

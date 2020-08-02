@@ -1,5 +1,5 @@
 {
-  "css.validate": false,
-  "scss.validate": false,
-  "stylelint.enable": true
+  // "css.validate": false,
+  // "scss.validate": false,
+  // "stylelint.enable": true
 }

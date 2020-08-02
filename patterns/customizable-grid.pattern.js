@@ -7,7 +7,7 @@ export default ({ newline, print, size }) => {
       let horizontal = j < size && j % hspacing == 0
       let vertical = i < size && i % vspacing == 0
 
-      print(horizontal && vertical ? '* ' : '  ')
+      print(horizontal && vertical ? "* " : "  ")
     }
     newline()
   }

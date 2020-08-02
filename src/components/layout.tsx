@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from "react";
 
-import Footer from './footer'
-import Header from './header'
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 const Layout: React.FC = ({ children }) => (
   <div className="flex flex-col justify-between min-h-screen">
@@ -9,6 +9,6 @@ const Layout: React.FC = ({ children }) => (
     <main className="flex-grow" children={children} />
     <Footer />
   </div>
-)
+);
 
-export default Layout
+export default Layout;

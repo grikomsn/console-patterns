@@ -7,7 +7,7 @@ export default ({ newline, print, size }) => {
       let bottom = i === size - 1
 
       let clause = ltrb || rtlb || top || bottom
-      print(clause ? '* ' : '  ')
+      print(clause ? "* " : "  ")
     }
     newline()
   }

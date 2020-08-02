@@ -6,7 +6,7 @@ export default ({ newline, print, size }) => {
       let head = lt && rt && i < size
       let line = j === size - 1
 
-      print(head || line ? '* ' : '  ')
+      print(head || line ? "* " : "  ")
     }
     newline()
   }

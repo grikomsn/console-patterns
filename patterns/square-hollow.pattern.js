@@ -7,7 +7,7 @@ export default ({ newline, print, size }) => {
       let right = j === size - 1
 
       let clause = top || bottom || left || right
-      print(clause ? '* ' : '  ')
+      print(clause ? "* " : "  ")
     }
     newline()
   }

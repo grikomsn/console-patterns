@@ -1,17 +1,17 @@
-import Document, {
+import NextDocument, {
   DocumentContext,
   Head,
   Html,
   Main,
   NextScript,
-} from 'next/document'
+} from "next/document";
 
-import config from '../../site-config'
+import config from "~/site-config";
 
-export default class extends Document {
+export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
+    const initialProps = await NextDocument.getInitialProps(ctx);
+    return { ...initialProps };
   }
 
   render() {
@@ -19,10 +19,7 @@ export default class extends Document {
       <Html lang="en">
         <Head>
           <meta charSet="UTF-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
+
           <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
@@ -128,6 +125,6 @@ export default class extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

@@ -12,7 +12,7 @@ export default ({ newline, print, size }) => {
       let outline = ltrb || rtlb || top || bottom
       let fill = fillTop || fillBottom
 
-      print(outline || fill ? '* ' : '  ')
+      print(outline || fill ? "* " : "  ")
     }
     newline()
   }

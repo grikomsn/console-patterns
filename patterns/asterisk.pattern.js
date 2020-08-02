@@ -6,7 +6,7 @@ export default ({ newline, print, size }) => {
       let d1 /* ↘ */ = i === j
       let d2 /* ↙ */ = j === 2 * size - i - 2
 
-      print(h || v || d1 || d2 ? '* ' : '  ')
+      print(h || v || d1 || d2 ? "* " : "  ")
     }
     newline()
   }

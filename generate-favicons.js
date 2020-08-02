@@ -1,13 +1,13 @@
-const favicons = require('favicons')
-const fs = require('fs')
-const path = require('path')
+const favicons = require("favicons");
+const fs = require("fs");
+const path = require("path");
 
-const config = require('./site-config')
+const config = require("./site-config");
 
 favicons(
-  path.join(__dirname, './src/images/kite.png'),
+  path.join(__dirname, "./src/images/kite.png"),
   {
-    path: '/icons/',
+    path: "/icons/",
     appName: config.title,
     appShortName: config.title,
     appDescription: config.description,
@@ -29,23 +29,23 @@ favicons(
   },
   (error, { files, images }) => {
     if (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
 
     images.forEach((image) => {
       fs.writeFile(
-        path.resolve(__dirname, './public/icons', image.name),
+        path.resolve(__dirname, "./public/icons", image.name),
         image.contents,
         (error) => error && console.error(error),
-      )
-    })
+      );
+    });
 
     files.forEach((file) => {
       fs.writeFile(
-        path.resolve(__dirname, './public', file.name),
+        path.resolve(__dirname, "./public", file.name),
         file.contents,
         (error) => error && console.error(error),
-      )
-    })
+      );
+    });
   },
-)
+);
