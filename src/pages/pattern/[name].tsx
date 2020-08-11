@@ -14,6 +14,7 @@ import { createPattern } from "@/utils";
 import theme from "@/prism-theme";
 import { toClipboard } from "copee";
 import { useRouter } from "next/router";
+import useDebounce from "@/hooks/use-debounce";
 
 function createGitHubLink(name: string) {
   return `https://github.com/grikomsn/console-patterns/blob/master/patterns/${name}`;
@@ -33,6 +34,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
   const dec = () => size > 1 && setSize(size - 1);
 
   const [code, setCode] = React.useState(source);
+  const [debouncedCode, update] = useDebounce(code);
   const PatternRenderer: React.FC<{ children: LogicFunction }> = (props) => (
     <pre>{createPattern(props.children).test(size)}</pre>
   );
@@ -74,7 +76,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
       </div>
 
       <LiveProvider
-        code={code}
+        code={debouncedCode}
         scope={{ PatternRenderer }}
         theme={theme}
         transformCode={transformer}
@@ -91,13 +93,19 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
 
             <div className="flex flex-col flex-grow pb-4 md:flex-row">
               <div className="overflow-x-auto text-sm lg:text-base">
-                <LiveEditor onChange={(newCode) => setCode(newCode)} />
+                <LiveEditor
+                  onChange={(newCode) => setCode(newCode)}
+                  onKeyPress={(e) => e.key == "Enter" && update()}
+                />
                 <LiveError />
               </div>
             </div>
 
             <div className="text-sm text-center">
-              <button className="link" onClick={() => toClipboard(code)}>
+              <button
+                className="link"
+                onClick={() => toClipboard(debouncedCode)}
+              >
                 Copy to clipboard
               </button>
               <span className="mx-2">/</span>
