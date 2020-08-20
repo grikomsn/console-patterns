@@ -1,7 +1,7 @@
 {
   "name": "console-patterns",
   "description": "Collection of snippets to render logical patterns",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "repository": "git@github.com:grikomsn/console-patterns.git",
   "author": "Griko Nibras <git@griko.id>",
   "scripts": {
