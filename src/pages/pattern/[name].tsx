@@ -2,7 +2,7 @@ import * as React from "react";
 import * as fs from "fs";
 import * as path from "path";
 
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticProps, NextPage, GetStaticPaths } from "next";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
 
 import A from "@/components/a";
@@ -136,7 +136,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const patternsDirectory = path.join(process.cwd(), "patterns");
   const filenames = fs.readdirSync(patternsDirectory);
 
@@ -151,7 +151,7 @@ export async function getStaticPaths() {
     paths,
     fallback: false,
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const patternsDirectory = path.join(process.cwd(), "patterns");

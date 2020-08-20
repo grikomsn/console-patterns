@@ -11,14 +11,37 @@ import { LogicFunction } from "@/types";
 import { createPattern } from "@/utils";
 import theme from "@/prism-theme";
 
-type PatternData = {
+interface PatternData {
   title: string;
   source: string;
   example: string;
-};
+}
 
-type HomePageProps = {
+interface HomePageProps {
   data: PatternData[];
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const patternsDirectory = path.join(process.cwd(), "patterns");
+  const filenames = fs.readdirSync(patternsDirectory);
+
+  let data: PatternData[] = filenames.reduce((acc, filename) => {
+    if (/\.pattern.js$/.test(filename)) {
+      const filePath = path.join(patternsDirectory, filename);
+      const source = fs.readFileSync(filePath, "utf8").trim();
+      const logic: LogicFunction = require(`../../patterns/${filename}`)
+        .default;
+      const example = createPattern(logic).test(5);
+      return acc.concat({ title: filename.split(".")[0], source, example });
+    }
+    return acc;
+  }, []);
+
+  return {
+    props: {
+      data,
+    },
+  };
 };
 
 const HomePage: NextPage<HomePageProps> = ({ data }) => (
@@ -71,28 +94,5 @@ const HomePage: NextPage<HomePageProps> = ({ data }) => (
     ))}
   </Container>
 );
-
-export const getStaticProps: GetStaticProps = async () => {
-  const patternsDirectory = path.join(process.cwd(), "patterns");
-  const filenames = fs.readdirSync(patternsDirectory);
-
-  let data: PatternData[] = filenames.reduce((acc, filename) => {
-    if (/\.pattern.js$/.test(filename)) {
-      const filePath = path.join(patternsDirectory, filename);
-      const source = fs.readFileSync(filePath, "utf8").trim();
-      const logic: LogicFunction = require(`../../patterns/${filename}`)
-        .default;
-      const example = createPattern(logic).test(5);
-      return acc.concat({ title: filename.split(".")[0], source, example });
-    }
-    return acc;
-  }, []);
-
-  return {
-    props: {
-      data,
-    },
-  };
-};
 
 export default HomePage;
