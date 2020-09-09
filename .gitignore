@@ -1,12 +1,8 @@
 .DS_Store
+.eslintcache
+.next
 .vercel
-/.next
-/build
-/node_modules
-/out
-/public/**/*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
+*.log
+node_modules
+public/**/*
 !/public/social.png

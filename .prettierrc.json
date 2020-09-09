@@ -1,0 +1,13 @@
+{
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": ["patterns/*.js"],
+      "options": {
+        "semi": false
+      }
+    }
+  ]
+}
