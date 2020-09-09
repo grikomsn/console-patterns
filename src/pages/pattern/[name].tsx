@@ -1,6 +1,6 @@
 import * as React from "react";
-import * as fs from "fs";
-import * as path from "path";
+import fs from "fs";
+import path from "path";
 
 import { GetStaticProps, NextPage, GetStaticPaths } from "next";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
@@ -16,14 +16,14 @@ import { toClipboard } from "copee";
 import { useRouter } from "next/router";
 import useDebounce from "@/hooks/use-debounce";
 
+interface PatternPageProps {
+  filename: string;
+  source: string;
+}
+
 function createGitHubLink(name: string) {
   return `https://github.com/grikomsn/console-patterns/blob/master/patterns/${name}`;
 }
-
-type PatternPageProps = {
-  filename: string;
-  source: string;
-};
 
 const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
   const router = useRouter();
@@ -35,16 +35,20 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
 
   const [code, setCode] = React.useState(source);
   const [debouncedCode, update] = useDebounce(code);
-  const PatternRenderer: React.FC<{ children: LogicFunction }> = (props) => (
-    <pre>{createPattern(props.children).test(size)}</pre>
-  );
+  const PatternRenderer: React.FC<{ children: LogicFunction }> = ({
+    children,
+  }) => <pre>{createPattern(children).test(size)}</pre>;
   const transformer = (s: string) => {
-    const source = s.replace(/export default /, "");
-    return `<PatternRenderer>{${source}}</PatternRenderer>`;
+    const sourceTrimmed = s.replace(/export default /, "");
+    return `<PatternRenderer>{${sourceTrimmed}}</PatternRenderer>`;
   };
 
   const Decrease: React.FC = () => (
-    <button className="px-2 text-gray-900 bg-gray-400 rounded-sm" onClick={dec}>
+    <button
+      className="px-2 text-gray-900 bg-gray-400 rounded-sm"
+      onClick={dec}
+      type="button"
+    >
       -
     </button>
   );
@@ -56,7 +60,11 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
   );
 
   const Increase: React.FC = () => (
-    <button className="px-2 text-gray-900 bg-gray-400 rounded-sm" onClick={inc}>
+    <button
+      className="px-2 text-gray-900 bg-gray-400 rounded-sm"
+      onClick={inc}
+      type="button"
+    >
       +
     </button>
   );
@@ -71,7 +79,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
 
       <div className="mb-4 text-center">
         <Link href="/">
-          <a>⬅ Back to gallery</a>
+          <a href="/">⬅ Back to gallery</a>
         </Link>
       </div>
 
@@ -95,7 +103,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
               <div className="overflow-x-auto text-sm lg:text-base">
                 <LiveEditor
                   onChange={(newCode) => setCode(newCode)}
-                  onKeyPress={(e) => e.key == "Enter" && update()}
+                  onKeyPress={(e) => e.key === "Enter" && update()}
                 />
                 <LiveError />
               </div>
@@ -105,6 +113,7 @@ const PatternPage: NextPage<PatternPageProps> = ({ source }) => {
               <button
                 className="link"
                 onClick={() => toClipboard(debouncedCode)}
+                type="button"
               >
                 Copy to clipboard
               </button>

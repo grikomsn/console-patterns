@@ -1,3 +1,5 @@
+/* eslint-disable import/prefer-default-export */
+
 import { LogicFunction } from "@/types";
 
 export function createPattern(logic: LogicFunction) {

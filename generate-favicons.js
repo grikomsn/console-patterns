@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const favicons = require("favicons");
 const fs = require("fs");
 const path = require("path");

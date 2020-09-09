@@ -3,7 +3,7 @@ import * as React from "react";
 type ValueType<T> = T extends infer U ? U : T;
 
 // https://usehooks.com/useDebounce
-const useDebounce = <T>(value: ValueType<T>, delay: number = 500) => {
+const useDebounce = <T>(value: ValueType<T>, delay = 500) => {
   const [debouncedValue, setDebouncedValue] = React.useState(value);
 
   React.useEffect(() => {
@@ -18,7 +18,7 @@ const useDebounce = <T>(value: ValueType<T>, delay: number = 500) => {
 
   const forceUpdate = () => setDebouncedValue(value);
 
-  return [debouncedValue, forceUpdate] as [ValueType<T>, () => {}];
+  return [debouncedValue, forceUpdate] as [ValueType<T>, () => void];
 };
 
 export default useDebounce;

@@ -5,7 +5,12 @@ import config from "~/site-config";
 
 const Header: React.FC = () => (
   <div className="p-4 text-center">
-    <h1>🪁 {config.title}</h1>
+    <h1>
+      <span role="img" aria-label="kite">
+        🪁
+      </span>{" "}
+      {config.title}
+    </h1>
     <p className="text-xl">{config.description}</p>
 
     <p className="text-sm">

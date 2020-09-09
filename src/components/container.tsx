@@ -4,11 +4,8 @@ import cns from "@sindresorhus/class-names";
 
 type ContainerProps = React.FC<React.HTMLAttributes<HTMLElement>>;
 
-const Container: ContainerProps = (props) => (
-  <section
-    {...props}
-    className={cns("container mx-auto p-4", props.className)}
-  />
+const Container: ContainerProps = ({ className, ...props }) => (
+  <section {...props} className={cns("container mx-auto p-4", className)} />
 );
 
 export default Container;

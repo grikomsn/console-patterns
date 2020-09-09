@@ -2,18 +2,25 @@ import * as React from "react";
 
 import cns from "@sindresorhus/class-names";
 
-export type AProps = React.AnchorHTMLAttributes<{}> & {
+interface AProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   custom?: boolean;
-};
+}
 
-const A: React.FC<AProps> = ({ custom = false, ...props }) => (
-  <a
-    {...props}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={cns({ "custom-link": custom }, props.className)}
-    children={props.children || props.href.replace(/https?:\/\//, "")}
-  />
-);
+const A: React.FC<AProps> = ({
+  children,
+  className,
+  custom = false,
+  href,
+  ...props
+}) => {
+  const mergedProps: AProps = {
+    ...props,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    className: cns({ "custom-link": custom }, className),
+  };
+
+  return <a {...mergedProps}>{children || href.replace(/https?:\/\//, "")}</a>;
+};
 
 export default A;

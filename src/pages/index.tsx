@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import * as React from "react";
 import * as fs from "fs";
 import * as path from "path";
@@ -25,10 +26,11 @@ export const getStaticProps: GetStaticProps = async () => {
   const patternsDirectory = path.join(process.cwd(), "patterns");
   const filenames = fs.readdirSync(patternsDirectory);
 
-  let data: PatternData[] = filenames.reduce((acc, filename) => {
+  const data: PatternData[] = filenames.reduce((acc, filename) => {
     if (/\.pattern.js$/.test(filename)) {
       const filePath = path.join(patternsDirectory, filename);
       const source = fs.readFileSync(filePath, "utf8").trim();
+      // eslint-disable-next-line import/no-dynamic-require
       const logic: LogicFunction = require(`../../patterns/${filename}`)
         .default;
       const example = createPattern(logic).test(5);
@@ -60,24 +62,19 @@ const HomePage: NextPage<HomePageProps> = ({ data }) => (
               theme={theme}
               code={source}
               language="javascript"
-              children={({
-                className,
-                getLineProps,
-                getTokenProps,
-                tokens,
-              }) => (
-                <pre
-                  className={className}
-                  children={tokens.map((line, i) => (
-                    <div {...getLineProps({ line, key: i })}>
+            >
+              {({ className, getLineProps, getTokenProps, tokens }) => (
+                <pre className={className}>
+                  {tokens.map((line, j) => (
+                    <div {...getLineProps({ line, key: j })} key={j}>
                       {line.map((token, key) => (
-                        <span {...getTokenProps({ token, key })} />
+                        <span {...getTokenProps({ token, key })} key={key} />
                       ))}
                     </div>
                   ))}
-                />
+                </pre>
               )}
-            />
+            </Highlight>
           </div>
 
           <div className="m-4 border border-gray-800" />
@@ -86,8 +83,8 @@ const HomePage: NextPage<HomePageProps> = ({ data }) => (
         </div>
 
         <div className="text-sm text-center">
-          <Link href="/pattern/[name]" as={`/pattern/${title}`}>
-            <a>Open playground</a>
+          <Link href={`/pattern/${title}`}>
+            <a href={`/pattern/${title}`}>Open playground</a>
           </Link>
         </div>
       </div>
