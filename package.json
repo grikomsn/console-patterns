@@ -10,6 +10,7 @@
     "build:favicons": "node generate-favicons",
     "clean": "rimraf .next \"./public/!(social.png)\"",
     "develop": "next dev",
+    "doctl": "doctl apps update 455f67d5-cf6f-45c0-8ee1-0c0d9391f7a6 --spec doctl.yaml",
     "format": "concurrently \"yarn:format:*\"",
     "format:index": "prettier --write \"*.{js,json,md}\"",
     "format:patterns": "prettier --write \"patterns/*.js\"",
